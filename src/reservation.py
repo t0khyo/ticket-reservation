@@ -1,5 +1,5 @@
 class Reservation:
-    def __init__(self, customer_name, event_name, selected_seat, ticket_type, total_cost):
+    def __init__(self, customer_name=None, event_name=None, selected_seat=None, ticket_type=None, total_cost=None):
         self.customer_name = customer_name
         self.event_name = event_name
         self.selected_seat = selected_seat
@@ -13,4 +13,3 @@ class Reservation:
         file_path = "data/reservation_data.txt"
         with open(file_path, 'a') as file:
             file.write(reservation.to_string() + "\n")
-    

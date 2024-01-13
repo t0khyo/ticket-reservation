@@ -1,12 +1,15 @@
 class Event:
-    def __init__(self, event_name, seating_map, ticket_prices, availability):
+    def __init__(self, event_name=None, reserved_seats=None, event_cost=None):
         self.event_name = event_name
-        self.seating_map = seating_map
-        self.ticket_prices = ticket_prices
-        self.availability = availability
+        self.reserved_seats = reserved_seats if reserved_seats else []
+        self.event_cost = event_cost
 
     def __repr__(self):
         return f"{self.event_name}"
+
+    def add_reserved_seat(self, seat):
+        self.reserved_seats.append(seat)
+        print(f"Seat {seat} reserved for {self.event_name}")
 
 def read_event_info_from_file(file_path):
     events = []
@@ -14,15 +17,14 @@ def read_event_info_from_file(file_path):
     try:
         with open(file_path, 'r') as file:
             for line in file:
-                # Assuming each line in the file contains information separated by commas
-                event_data = line.strip().split(',')
-                if len(event_data) == 4:
-                    # Extracting data for each event
-                    event_name, seating_map, ticket_prices, availability = event_data
-                    event = Event(event_name, seating_map, ticket_prices, availability)
-                    events.append(event)
-                else:
-                    print(f"Skipping invalid line: {line}")
+                data = line.strip().split(', ')
+                event_name = data[0]
+                reserved_seats = [seat.strip('[]') for seat in data[1].split()]
+                event_costs = [float(cost.strip('[]')) for cost in data[2].split()]
+
+                # Create Event object
+                event = Event(event_name, reserved_seats, event_costs)
+                events.append(event)
 
     except FileNotFoundError:
         print(f"File not found: {file_path}")
@@ -31,14 +33,29 @@ def read_event_info_from_file(file_path):
 
     return events
 
-# Updated file path
-file_path = 'data/events_data.txt'  # Replace with the actual path to your file
-event_list = read_event_info_from_file(file_path)
 
-# Print information for each event
-for event in event_list:
-    print(f"Event Name: {event.event_name}")
-    print(f"Seating Map: {event.seating_map}")
-    print(f"Ticket Prices: {event.ticket_prices}")
-    print(f"Availability: {event.availability}")
-    print()
+def update_event_reserved_seats_by_name(file_path, event_name, new_reserved_seat):
+    events = read_event_info_from_file(file_path)
+    print(events)
+    event = None  # Initialize event to None
+
+    # Find the event by name
+    for e in events:
+        if e.event_name == event_name:
+            # Remove the old event line
+            events.remove(e)
+            event = e  # Assign the found event to the 'event' variable
+            break
+
+    # Update the event with the new reserved seat
+    if event:
+        event.add_reserved_seat(new_reserved_seat)
+        events.append(event)
+
+        # Rewrite the entire file with the updated events
+        with open(file_path, 'w') as file:
+            for e in events:
+                file.write(f"{e.event_name}, [{' '.join(e.reserved_seats)}], [{' '.join(map(str, e.event_cost))}]\n")
+
+
+
