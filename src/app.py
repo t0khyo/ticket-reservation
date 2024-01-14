@@ -65,12 +65,11 @@ class TicketReservationApp:
         confirmation_frame.pack()
     
         # Add labels for headers
-        ttk.Label(confirmation_frame, text="Enter Your Name:", font=("Helvetica", 12)).grid(row=0, column=0, pady=10, sticky="w")
-        ttk.Label(confirmation_frame, text="Reservation Details", font=("Helvetica", 16, "bold")).grid(row=1, column=0, columnspan=2, pady=10, sticky="w")
-    
+        ttk.Label(confirmation_frame, text="Reservation Details", font=("Helvetica", 18, "bold")).grid(row=0, column=0, columnspan=2, pady=10, sticky="w")
+        ttk.Label(confirmation_frame, text="Name:", font=("Helvetica", 14)).grid(row=1, column=0, pady=10, sticky="w")
         # Simulate adding an Entry for customer name
-        self.customer_name_entry = ttk.Entry(confirmation_frame, font=("Helvetica", 12))
-        self.customer_name_entry.grid(row=0, column=1, pady=10, sticky="w")
+        self.customer_name_entry = ttk.Entry(confirmation_frame, font=("Helvetica", 14))
+        self.customer_name_entry.grid(row=1, column=1, pady=10, sticky="w")
     
         # Add labels to display reservation details in a grid
         details_labels = [
@@ -87,6 +86,8 @@ class TicketReservationApp:
         # Simulate a button to finish and go back to home scene
         finish_button = ttk.Button(confirmation_frame, text="Finish", command=self.confirm_booking)
         finish_button.grid(row=row_index + 1, column=0, columnspan=2, pady=10, ipadx=5, ipady=3)
+        finish_button = ttk.Button(confirmation_frame, text="cancel", command=self.home_scene)
+        finish_button.grid(row=row_index + 2, column=0, columnspan=2, pady=10, ipadx=5, ipady=3)
 
 
 

@@ -1,1 +1,8 @@
 omar,Breaking Bad,VIP6,VIP,60.0
+hello,Breaking good,D5,standard D,40.0
+Omar radwan,Breaking good,C5,standard C,40.0
+abdelrahman,Breaking Bad,D6,standard D,40.0
+hello,Breaking good,VIP16,None,0.0
+omar,Breaking good,C4,standard C,40.0
+hello,Spiderman,D3,standard D,50.0
+omar,Spiderman,D4,standard D,50.0
