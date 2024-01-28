@@ -56,6 +56,3 @@ def update_event_reserved_seats_by_name(file_path, event_name, new_reserved_seat
         with open(file_path, 'w') as file:
             for e in events:
                 file.write(f"{e.event_name}, [{' '.join(e.reserved_seats)}], [{' '.join(map(str, e.event_cost))}]\n")
-
-
-
