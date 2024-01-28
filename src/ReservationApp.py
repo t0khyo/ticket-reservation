@@ -119,7 +119,6 @@ class TicketReservationApp:
                     seat_button = ttk.Button(frame, text=seat, command=lambda s=seat: self.select_seat(s), style='Available.TButton')
 
                 seat_button.grid(row=row_index, column=col_index, padx=5, pady=5)
-
     
     def select_seat(self, seat):
         if seat in self.selected_event.reserved_seats:
@@ -129,14 +128,13 @@ class TicketReservationApp:
         self.reservation.selected_seat = seat
         
         if self.reservation.selected_seat.startswith("VIP"):
-            self.reservation.selected_seat = self.selected_event.event_cost[1]
-            self.reservation.ticket_type = "VIP"
+            self.reservation.total_cost = self.selected_event.event_cost[1]
+            self.reservation.ticket_type = "VIP "
         else:
             self.reservation.total_cost = self.selected_event.event_cost[0]
             self.reservation.ticket_type = "standard " + self.reservation.selected_seat[0]
             
         self.display_confirmation_scene()    
-
         
         
 # *Confirmation Scene*

@@ -18,3 +18,4 @@ what are you looking for maaaan,Breaking Bad,A3,standard A,40.0
 h,Spiderman,B5,standard B,50.0
 haha,Breaking Bad,C4,standard C,40.0
 jjj,Spiderman 5,B4,standard B,50.0
+omar,Spiderman,VIP12,VIP ,70.0
